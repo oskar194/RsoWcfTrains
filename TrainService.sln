@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainService", "TrainService\TrainService.csproj", "{96C5F12E-F086-4311-A743-9DE5C811E335}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{1E89908F-A563-4AA0-BF1B-3E0E2B0036C0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96C5F12E-F086-4311-A743-9DE5C811E335} = {96C5F12E-F086-4311-A743-9DE5C811E335}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainServiceHost", "TrainServiceHost\TrainServiceHost.csproj", "{0B3F904F-1B12-4FB5-916D-4D70BF0489E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96C5F12E-F086-4311-A743-9DE5C811E335}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96C5F12E-F086-4311-A743-9DE5C811E335}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96C5F12E-F086-4311-A743-9DE5C811E335}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96C5F12E-F086-4311-A743-9DE5C811E335}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E89908F-A563-4AA0-BF1B-3E0E2B0036C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E89908F-A563-4AA0-BF1B-3E0E2B0036C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E89908F-A563-4AA0-BF1B-3E0E2B0036C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E89908F-A563-4AA0-BF1B-3E0E2B0036C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B3F904F-1B12-4FB5-916D-4D70BF0489E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B3F904F-1B12-4FB5-916D-4D70BF0489E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B3F904F-1B12-4FB5-916D-4D70BF0489E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B3F904F-1B12-4FB5-916D-4D70BF0489E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
