@@ -13,7 +13,9 @@ namespace TrainService {
 
 		[OperationContract(Name ="GetTripWithDate")]
 		List<string> GetTrip(string fromCity, string toCity, DateTime fromDate, DateTime toDate);
+
 		[OperationContract(Name = "GetTripWithoutDate")]
+		[FaultContract(typeof(MyException))]
 		List<string> GetTrip(string fromCity, string toCity);
 
 		// TODO: Add your service operations here
@@ -21,5 +23,15 @@ namespace TrainService {
 
 
 	// Use a data contract as illustrated in the sample below to add composite types to service operations.
+	[DataContract]
+	class MyException {
+		private string msg;
 
+		public MyException(string msg) {
+			this.msg = msg;
+		}
+
+		[DataMember]
+		public string Msg { get { return msg; } set { msg = value; } }
+	}
 }

@@ -11,7 +11,7 @@ using System.Text;
 using System.Web.Hosting;
 
 namespace TrainService {
-	class DataTrain {
+	public class DataTrain {
 		string cityFrom;
 		string cityTo;
 		DateTime fromDate;
@@ -25,7 +25,7 @@ namespace TrainService {
 			this.ToDate = toDate;
 		}
 		public override string ToString() {
-			return "From " + CityFrom + "departure: " + FromDate.ToShortDateString() + " to " + CityTo + " arrives " + ToDate.ToShortDateString();
+			return "From " + CityFrom + " at " + FromDate.ToShortDateString()+ " " + FromDate.ToShortTimeString() + " to " + CityTo + " at " + ToDate.ToShortDateString() + " " + ToDate.ToShortTimeString();
 		}
 
 		public string CityFrom {
@@ -72,8 +72,8 @@ namespace TrainService {
 	// NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
 	public class Service1 : IService1 {
 		private List<DataTrain> list;
-		private readonly DateTime defaultFromDate = new DateTime(3000, 12, 30);
-		private readonly DateTime defaultToDate = new DateTime(1900, 1, 1);
+		private readonly DateTime defaultToDate = new DateTime(3000, 12, 30);
+		private readonly DateTime defaultFromDate = new DateTime(1900, 1, 1);
 		public Service1() {
 			list = parseDocument(Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "App_Data","trains.csv"));
 		}
@@ -82,25 +82,54 @@ namespace TrainService {
 			return GetTrip(fromCity, toCity, defaultFromDate, defaultToDate);
 		}
 
+		public bool AssertThatCityExist(string city) {
+			bool found = false;
+			foreach(DataTrain dataTrain in list) {
+				if(dataTrain.CityFrom.Equals(city) || dataTrain.CityTo.Equals(city)) {
+					found = true;
+				}
+			}
+			return found;
+		}
+
+		public List<DataTrain> ExtractMatchingTrains(List<DataTrain> trainsList, string fromCity, DateTime fromDate, DateTime toDate) {
+			List<DataTrain> initList = new List<DataTrain>();
+			foreach (DataTrain dataTrain in trainsList) {
+				if (dataTrain.CityFrom.Equals(fromCity) && dataTrain.FromDate.CompareTo(fromDate) >= 0 && dataTrain.ToDate.CompareTo(toDate) <= 0) {
+					initList.Add(dataTrain);
+				}
+			}
+			return initList;
+		}
+
 		public List<string> GetTrip(string fromCity, string toCity, DateTime fromDate, DateTime toDate){
+			if (AssertThatCityExist(fromCity))
+				throw new FaultException<MyException>(new MyException("City " + fromCity + " not found"));
+			if(AssertThatCityExist(toCity))
+				throw new FaultException<MyException>(new MyException("City " + toCity + " not found"));
 			List<DataTrain> path = new List<DataTrain>();
+			List<DataTrain> initList = new List<DataTrain>();
 			List<string> result = new List<string>();
-			foreach (DataTrain d in list) {
-				if (d.CityFrom.Equals(fromCity) && DateTime.Compare(d.FromDate, fromDate) >= 0 
-													&& DateTime.Compare(d.ToDate, toDate) <= 0) {
-					if (d.CityTo.Equals(toCity)) {
-						path.Add(d);
+			initList = ExtractMatchingTrains(list, fromCity, fromDate, toDate);
+			if(initList.Count > 0) {
+				foreach (DataTrain dataTrain in initList) {
+					if (dataTrain.CityTo.Equals(toCity)) {
+						result.Add(dataTrain.ToString());
+					} else {
+						path.Add(dataTrain);
 					}
-					GetTrip(d.CityTo, toCity, fromDate, toDate);
 				}
 			}
-			if(path.Count > 0) {
-				result.Add("Path start");
-				foreach (DataTrain d in path) {
-					result.Add(d.ToString());
+			foreach(DataTrain dt in path) {
+				List<DataTrain> expanded = ExtractMatchingTrains(list, dt.CityTo, fromDate, toDate);
+				foreach (DataTrain dataTrain in expanded) {
+					if (dataTrain.CityTo.Equals(toCity)) {
+						result.Add("Start in : " + dt.ToString() + " and " + dataTrain.ToString());
+					}
 				}
-				result.Add("Path end");
 			}
+			if(result.Count < 1)
+				throw new FaultException<MyException>(new MyException("Any connection cannot be found"));
 			return result;
 		}
 
