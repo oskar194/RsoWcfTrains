@@ -103,9 +103,9 @@ namespace TrainService {
 		}
 
 		public List<string> GetTrip(string fromCity, string toCity, DateTime fromDate, DateTime toDate){
-			if (AssertThatCityExist(fromCity))
+			if (!AssertThatCityExist(fromCity))
 				throw new FaultException<MyException>(new MyException("City " + fromCity + " not found"));
-			if(AssertThatCityExist(toCity))
+			if(!AssertThatCityExist(toCity))
 				throw new FaultException<MyException>(new MyException("City " + toCity + " not found"));
 			List<DataTrain> path = new List<DataTrain>();
 			List<DataTrain> initList = new List<DataTrain>();
@@ -121,7 +121,7 @@ namespace TrainService {
 				}
 			}
 			foreach(DataTrain dt in path) {
-				List<DataTrain> expanded = ExtractMatchingTrains(list, dt.CityTo, fromDate, toDate);
+				List<DataTrain> expanded = ExtractMatchingTrains(list, dt.CityTo, dt.FromDate, toDate);
 				foreach (DataTrain dataTrain in expanded) {
 					if (dataTrain.CityTo.Equals(toCity)) {
 						result.Add("Start in : " + dt.ToString() + " and " + dataTrain.ToString());

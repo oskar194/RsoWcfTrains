@@ -8,20 +8,21 @@ using ConsoleApplication1.ServiceReference1;
 
 namespace ConsoleApplication1 {
 	class Program {
+		public Service1Client client = new Service1Client();
 		static void Main(string[] args) {
 			Program p = new Program();
-			Service1Client client = new Service1Client();
-			p.TryFindWithDate("A", "C", new DateTime(2017, 05, 10, 8, 0, 0), new DateTime(2017, 05, 11, 3, 0, 0),client);
-			p.TryFindWithDate("A", "F", new DateTime(2017, 05, 10, 8, 0, 0), new DateTime(2017, 05, 11, 3, 0, 0), client);
-			p.TryFindWithDate("G", "C", new DateTime(2017, 05, 10, 8, 0, 0), new DateTime(2017, 05, 11, 3, 0, 0), client);
-			p.TryFindWithDate("C", "D", new DateTime(2017, 05, 10, 8, 0, 0), new DateTime(2017, 06, 11, 3, 0, 0), client);
-			p.TryFindWithDate("B", "C", new DateTime(2018, 05, 10, 8, 0, 0), new DateTime(2017, 06, 11, 3, 0, 0), client);
-			client.Close();
+			
+			p.TryFindWithDate("A", "C", new DateTime(2017, 05, 10, 8, 0, 0), new DateTime(2017, 05, 11, 3, 0, 0));
+			p.TryFindWithDate("A", "F", new DateTime(2017, 05, 10, 8, 0, 0), new DateTime(2017, 05, 11, 3, 0, 0));
+			p.TryFindWithDate("G", "C", new DateTime(2017, 05, 10, 8, 0, 0), new DateTime(2017, 05, 11, 3, 0, 0));
+			p.TryFindWithDate("C", "D", new DateTime(2017, 05, 10, 8, 0, 0), new DateTime(2017, 06, 11, 3, 0, 0));
+			p.TryFindWithDate("B", "C", new DateTime(2018, 05, 10, 8, 0, 0), new DateTime(2017, 06, 11, 3, 0, 0));
+			p.client.Close();
 			Console.ReadKey();
 		}
 
 
-		public void TryFindWithDate(string cityFrom, string cityTo, DateTime dateFrom, DateTime dateTo, Service1Client client) {
+		public void TryFindWithDate(string cityFrom, string cityTo, DateTime dateFrom, DateTime dateTo) {
 			Console.WriteLine("Trying to find path from " + cityFrom +
 				" to " + cityTo + " at " + dateFrom.ToShortDateString() + " " + dateFrom.ToShortTimeString()
 				+ " to " + dateTo.ToShortDateString() + " " + dateTo.ToShortTimeString());
@@ -37,7 +38,7 @@ namespace ConsoleApplication1 {
 			}
 		}
 
-		public void TryFindWithoutDate(string cityFrom, string cityTo, Service1Client client) {
+		public void TryFindWithoutDate(string cityFrom, string cityTo) {
 			Console.WriteLine("Trying to find path from " + cityFrom +
 				" to " + cityTo);
 			try {
