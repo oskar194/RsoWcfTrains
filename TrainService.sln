@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainService", "TrainService\TrainService.csproj", "{96C5F12E-F086-4311-A743-9DE5C811E335}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{1E89908F-A563-4AA0-BF1B-3E0E2B0036C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication2", "ConsoleApplication1\ConsoleApplication2.csproj", "{1E89908F-A563-4AA0-BF1B-3E0E2B0036C0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{96C5F12E-F086-4311-A743-9DE5C811E335} = {96C5F12E-F086-4311-A743-9DE5C811E335}
 	EndProjectSection

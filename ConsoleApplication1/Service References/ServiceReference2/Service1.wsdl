@@ -3,9 +3,9 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:59428/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:59428/Service1.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/TrainService" />
       <xsd:import schemaLocation="http://localhost:59428/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:59428/Service1.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:59428/Service1.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/TrainService" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="Service1_GetTripWithDate_InputMessage">
@@ -14,6 +14,9 @@
   <wsdl:message name="Service1_GetTripWithDate_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTripWithDateResponse" />
   </wsdl:message>
+  <wsdl:message name="Service1_GetTripWithDate_MyExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/TrainService" name="detail" element="q1:MyException" />
+  </wsdl:message>
   <wsdl:message name="Service1_GetTripWithoutDate_InputMessage">
     <wsdl:part name="parameters" element="tns:GetTripWithoutDate" />
   </wsdl:message>
@@ -21,12 +24,13 @@
     <wsdl:part name="parameters" element="tns:GetTripWithoutDateResponse" />
   </wsdl:message>
   <wsdl:message name="Service1_GetTripWithoutDate_MyExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/TrainService" name="detail" element="q1:MyException" />
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/TrainService" name="detail" element="q2:MyException" />
   </wsdl:message>
   <wsdl:portType name="Service1">
     <wsdl:operation name="GetTripWithDate">
       <wsdl:input wsaw:Action="http://tempuri.org/Service1/GetTripWithDate" message="tns:Service1_GetTripWithDate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Service1/GetTripWithDateResponse" message="tns:Service1_GetTripWithDate_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/Service1/GetTripWithDateMyExceptionFault" name="MyExceptionFault" message="tns:Service1_GetTripWithDate_MyExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetTripWithoutDate">
       <wsdl:input wsaw:Action="http://tempuri.org/Service1/GetTripWithoutDate" message="tns:Service1_GetTripWithoutDate_InputMessage" />
@@ -44,6 +48,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="MyExceptionFault">
+        <soap:fault use="literal" name="MyExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetTripWithoutDate">
       <soap:operation soapAction="http://tempuri.org/Service1/GetTripWithoutDate" style="document" />

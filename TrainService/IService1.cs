@@ -12,6 +12,7 @@ namespace TrainService {
 	public interface IService1 {
 
 		[OperationContract(Name ="GetTripWithDate")]
+		[FaultContract(typeof(MyException))]
 		List<string> GetTrip(string fromCity, string toCity, DateTime fromDate, DateTime toDate);
 
 		[OperationContract(Name = "GetTripWithoutDate")]

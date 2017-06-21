@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ConsoleApplication1.ServiceReference1 {
+namespace ConsoleApplication1.ServiceReference2 {
     using System.Runtime.Serialization;
     using System;
     
@@ -59,17 +59,18 @@ namespace ConsoleApplication1.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.Service1")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference2.Service1")]
     public interface Service1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Service1/GetTripWithDate", ReplyAction="http://tempuri.org/Service1/GetTripWithDateResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConsoleApplication1.ServiceReference2.MyException), Action="http://tempuri.org/Service1/GetTripWithDateMyExceptionFault", Name="MyException", Namespace="http://schemas.datacontract.org/2004/07/TrainService")]
         string[] GetTripWithDate(string fromCity, string toCity, System.DateTime fromDate, System.DateTime toDate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Service1/GetTripWithDate", ReplyAction="http://tempuri.org/Service1/GetTripWithDateResponse")]
         System.Threading.Tasks.Task<string[]> GetTripWithDateAsync(string fromCity, string toCity, System.DateTime fromDate, System.DateTime toDate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Service1/GetTripWithoutDate", ReplyAction="http://tempuri.org/Service1/GetTripWithoutDateResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(ConsoleApplication1.ServiceReference1.MyException), Action="http://tempuri.org/Service1/GetTripWithoutDateMyExceptionFault", Name="MyException", Namespace="http://schemas.datacontract.org/2004/07/TrainService")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ConsoleApplication1.ServiceReference2.MyException), Action="http://tempuri.org/Service1/GetTripWithoutDateMyExceptionFault", Name="MyException", Namespace="http://schemas.datacontract.org/2004/07/TrainService")]
         string[] GetTripWithoutDate(string fromCity, string toCity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Service1/GetTripWithoutDate", ReplyAction="http://tempuri.org/Service1/GetTripWithoutDateResponse")]
@@ -77,12 +78,12 @@ namespace ConsoleApplication1.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface Service1Channel : ConsoleApplication1.ServiceReference1.Service1, System.ServiceModel.IClientChannel {
+    public interface Service1Channel : ConsoleApplication1.ServiceReference2.Service1, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Service1Client : System.ServiceModel.ClientBase<ConsoleApplication1.ServiceReference1.Service1>, ConsoleApplication1.ServiceReference1.Service1 {
+    public partial class Service1Client : System.ServiceModel.ClientBase<ConsoleApplication1.ServiceReference2.Service1>, ConsoleApplication1.ServiceReference2.Service1 {
         
         public Service1Client() {
         }

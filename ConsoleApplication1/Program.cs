@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
-using ConsoleApplication1.ServiceReference1;
+using ConsoleApplication1.ServiceReference2;
 
-namespace ConsoleApplication1 {
+namespace ConsoleApplication2 {
 	class Program {
 		public Service1Client client = new Service1Client();
 		static void Main(string[] args) {
